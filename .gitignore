@@ -116,5 +116,4 @@ dist
 .pnp.*
 
 # Custom section
-
 config.json5
