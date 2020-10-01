@@ -2,7 +2,8 @@
 import "json5/lib/register";
 import dbg from "debug";
 import axios from "axios";
-import { Parser, Calendar } from "ikalendar";
+//import { Parser, Calendar } from "ikalendar";
+import { async as ical, CalendarComponent } from "node-ical";
 
 const config = require("./config.json5");
 
@@ -14,13 +15,14 @@ async function getICS(): Promise<string> {
   return (await axios.get(config.calendarURL)).data;
 }
 
-async function getCalendar(): Promise<Calendar> {
-  const parser = new Parser();
-  return parser.parse(await getICS());
+async function getCalendar(): Promise<CalendarComponent[]> {
+  return Object.values(await ical.parseICS(await getICS()));
 }
 
 async function main() {
-  debug(await getCalendar());
+  let calendar: CalendarComponent[] = await getCalendar();
+
+  debug(calendar);
 }
 
-main();
+main(); // ISO 8601
