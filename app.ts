@@ -2,8 +2,9 @@
 import "json5/lib/register";
 import dbg from "debug";
 import AnalyseScheduler from "./AnalyseScheduler";
+import { Config } from "./types";
 
-const config = require("./config.json5");
+const config: Config = require("./config.json5");
 
 dbg.enable("twitter-analyse:*");
 const debug = dbg("twitter-analyse:main");
