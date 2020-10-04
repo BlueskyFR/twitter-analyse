@@ -4,7 +4,7 @@ Un bot Twitter qui compte le nombre d'heures de Maths (Analyse) restantes :)
 
 ## Setup
 
-To run this project on your own, you must create a `config.json5` containing the following informations:
+To run this project on your own, you must create a `config.json5` file containing the following informations:
 
 ```json5
 {
