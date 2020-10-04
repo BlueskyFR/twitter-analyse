@@ -4,6 +4,7 @@ export interface Config {
   calendarURL: string;
 
   eventMatchName: string;
+
   analyse: {
     totalHours: number;
     hoursLeft: number;
