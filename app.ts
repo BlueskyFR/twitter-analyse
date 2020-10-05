@@ -89,16 +89,15 @@ function startLoop() {
   const calendarChecker: CalendarChecker = new CalendarChecker(config);
 
   loop(calendarChecker, tweetScheduler);
-  setTimeout(
-    () =>
-      setInterval(
-        loop,
-        Duration.fromObject({ hours: 1 }).as("milliseconds"),
-        calendarChecker,
-        tweetScheduler
-      ),
-    nextHalf.diffNow().as("milliseconds")
-  );
+  setTimeout(() => {
+    loop(calendarChecker, tweetScheduler);
+    setInterval(
+      loop,
+      Duration.fromObject({ hours: 1 }).as("milliseconds"),
+      calendarChecker,
+      tweetScheduler
+    );
+  }, nextHalf.diffNow().as("milliseconds"));
 }
 
 startLoop();
