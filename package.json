@@ -8,9 +8,11 @@
   "license": "Apache-2.0",
   "scripts": {
     "start": "ts-node app.ts",
-    "watch": "nodemon"
+    "watch": "nodemon",
+    "build": "tsc -p . --outDir build/"
   },
   "dependencies": {
+    "@types/debug": "^4.1.5",
     "@types/jju": "^1.4.1",
     "@types/luxon": "^1.25.0",
     "@types/node": "^14.11.2",
