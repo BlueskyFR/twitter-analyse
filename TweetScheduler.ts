@@ -8,7 +8,7 @@ const debug = dbg("twitter-analyse:TweetScheduler");
 
 // For test only
 /* DateTime.local = function () {
-  return DateTime.fromObject({ day: 5, month: 10, year: 2020, hour: 16, minute: 59 });
+  return DateTime.fromObject({ day: 5, month: 10, year: 2020, hour: 14, minute: 32 });
 }; */
 
 export default class TweetScheduler {

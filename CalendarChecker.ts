@@ -4,14 +4,13 @@ import { async as ical, CalendarComponent } from "node-ical";
 import { DateTime, Duration, Settings } from "luxon";
 import dbg from "debug";
 
-import TweetScheduler from "./TweetScheduler";
 import { Config, CourseLookupResult } from "./types";
 
 const debug = dbg("twitter-analyse:CalendarChecker");
 
 // For test only
 /* DateTime.local = function () {
-  return DateTime.fromObject({ day: 5, month: 10, year: 2020, hour: 16, minute: 59 });
+  return DateTime.fromObject({ day: 5, month: 10, year: 2020, hour: 14, minute: 32 });
 }; */
 
 export default class CalendarChecker {
@@ -84,8 +83,8 @@ export default class CalendarChecker {
     if (!courses.next || !this.isAnalyse(courses.next)) return true;
 
     // The next course exists and is analyse
-    let currentEnd = DateTime.fromJSDate(courses.next.start as Date);
-    let nextStart = DateTime.fromJSDate(courses.current.end as Date);
+    let currentEnd = DateTime.fromJSDate(courses.current.end as Date);
+    let nextStart = DateTime.fromJSDate(courses.next.start as Date);
     let diff = nextStart.diff(currentEnd, "minutes").minutes;
 
     // If the next analyse course begins more than 30 minutes

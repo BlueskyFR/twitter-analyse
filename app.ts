@@ -2,7 +2,6 @@
 import * as jju from "jju";
 import * as fs from "fs";
 import dbg from "debug";
-import AnalyseScheduler from "./TweetScheduler";
 import { Config, CourseLookupResult } from "./types";
 import TweetScheduler from "./TweetScheduler";
 import { DateTime, Duration, Settings } from "luxon";
@@ -13,7 +12,7 @@ const debug = dbg("twitter-analyse:main");
 
 // For test only
 /* DateTime.local = function () {
-  return DateTime.fromObject({ day: 5, month: 10, year: 2020, hour: 16, minute: 59 });
+  return DateTime.fromObject({ day: 5, month: 10, year: 2020, hour: 14, minute: 32 });
 }; */
 
 const configFileName = "config.json5";
@@ -55,7 +54,7 @@ async function loop(calendar: CalendarChecker, tweetScheduler: TweetScheduler) {
       updateConfigFile(config);
 
       if (calendar.shouldTweet(courseLookup)) {
-        debug("Tweeting!");
+        debug("Scheduling tweet!");
 
         // Schedule the tweet
         tweetScheduler.tweetAfter(courseLookup.current);
@@ -81,7 +80,7 @@ function startLoop() {
   // Now add an hour if the current minutes were >= 29
   // (we are adding 1 minute of safety to avoid running it 2 times
   // consecutively at the first execution)
-  if (nextHalf <= now.plus({ minutes: 1 })) nextHalf.plus({ hours: 1 });
+  if (nextHalf <= now.plus({ minutes: 1 })) nextHalf = nextHalf.plus({ hours: 1 });
 
   // Initialize the Tweet Scheduler
   const tweetScheduler: TweetScheduler = new TweetScheduler(config);
