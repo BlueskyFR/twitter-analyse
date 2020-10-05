@@ -1,5 +1,5 @@
 import { CalendarComponent } from "node-ical";
-import * as Twit from "twit";
+import Twit from "twit";
 import dbg from "debug";
 import { Config } from "./types";
 import { DateTime, Duration } from "luxon";

@@ -78,6 +78,8 @@ export default class CalendarChecker {
    * @param courses the course lookup result returned by `courseLookup()`
    */
   shouldTweet(courses: CourseLookupResult): boolean {
+    // Security check
+    if (!courses.current) return false;
     // If the next course does not exist, is not analyse
     if (!courses.next || !this.isAnalyse(courses.next)) return true;
 

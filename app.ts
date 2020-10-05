@@ -17,7 +17,7 @@ const debug = dbg("twitter-analyse:main");
 }; */
 
 const configFileName = "config.json5";
-let rawConfig;
+let rawConfig: string;
 
 function readConfigFile(): Config {
   rawConfig = fs.readFileSync(configFileName, "utf8");
@@ -92,7 +92,7 @@ function startLoop() {
   setTimeout(
     () =>
       setInterval(
-        loop.bind(this),
+        loop,
         Duration.fromObject({ hours: 1 }).as("milliseconds"),
         calendarChecker,
         tweetScheduler
