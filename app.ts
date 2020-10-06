@@ -76,7 +76,7 @@ function startLoop() {
   // We want to run the loop each hours and a half (Xh30),
   // so we compute the time left until we launch the setInterval
   // Set the minutes to 30
-  let nextHalf = now.set({ minute: 30 });
+  let nextHalf = now.set({ minute: 30, second: 0, millisecond: 0 });
   // Now add an hour if the current minutes were >= 29
   // (we are adding 1 minute of safety to avoid running it 2 times
   // consecutively at the first execution)
