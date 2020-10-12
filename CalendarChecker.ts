@@ -50,11 +50,19 @@ export default class CalendarChecker {
         DateTime.fromJSDate(event.end as Date) >= now
     );
 
+    const current: CalendarComponent = calendar[index];
+    let nextIndex = calendar.findIndex(
+      (event) =>
+        DateTime.fromJSDate(event.start as Date) >= DateTime.fromJSDate(current.end as Date) &&
+        DateTime.fromJSDate(event.end as Date) <=
+          DateTime.fromJSDate(current.end as Date).plus({ hours: 2 })
+    );
+
     // Return the current and the next courses
     return <CourseLookupResult>{
-      current: calendar[index],
+      current: current,
       // We suppose that the next index in the calendar is the next course
-      next: calendar.length > index + 1 ? calendar[index + 1] : null,
+      next: nextIndex != -1 ? calendar[nextIndex] : null,
     };
   }
 
