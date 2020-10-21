@@ -36,15 +36,19 @@ export default class TweetScheduler {
 
     const totalHours: number = this.config.analyse.totalHours;
     const hoursLeft: number = this.config.analyse.hoursLeft;
-    const percentsAchieved: number = parseInt((((totalHours - hoursLeft) / totalHours) * 100).toFixed(0));
+    const percentsAchieved: number = parseInt(
+      (((totalHours - hoursLeft) / totalHours) * 100).toFixed(0)
+    );
 
     setTimeout(async () => {
       try {
-        const specialEvent: boolean = percentsAchieved >= 50;
+        const specialEvent: boolean = percentsAchieved % 25 == 0;
         const response = await this.twitter.post("statuses/update", <Twit.Params>{
-          status: specialEvent ?
-            `OMG WOW IL NE RESTE DÉJÀ PLUS QUE ${hoursLeft} HEURES D'ANALYYYYYSEEEEE GLHF POUR LES ${100 - percentsAchieved}% restants !!!\n🥳🥳🎉🎉🌮🌮` :
-            `Et hop, il reste ${hoursLeft} heures d'analyse !\nCourage ! (${percentsAchieved}% déjà effectués 🙃)`,
+          status: specialEvent
+            ? `OMG WOW IL NE RESTE DÉJÀ PLUS QUE ${hoursLeft} HEURES D'ANALYYYYYSEEEEE GLHF POUR LES ${
+                100 - percentsAchieved
+              }% restants !!!\n🥳🥳🎉🎉🌮🌮`
+            : `Et hop, il reste ${hoursLeft} heures d'analyse !\nCourage ! (${percentsAchieved}% déjà effectués 🙃)`,
         });
 
         debug(`Tweet successfully posted! ID: ${(response.data as any).id_str}`);
